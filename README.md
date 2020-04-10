@@ -1,3 +1,3 @@
-# Showroom
+# Showroom - Frontend
 
-this is the readme
+this is the readme for the frontend
