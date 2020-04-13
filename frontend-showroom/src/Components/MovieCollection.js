@@ -1,9 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react'
+import { Grid } from 'semantic-ui-react'
+import MoiveCard from './MovieCard'
 
-export default class MovieCollection extends Component {
-  render () {
-    return <div>
-      {'map over movies to <MovieCard key={movie.id} movie={movie} />'}
-    </div>
-  }
-}
+const MoiveCollection = (props) => (
+  <Grid columns={3} divided>
+    {props.movies.map(movie => (
+      <Grid.Column width={5}>
+        <MoiveCard movie={movie} key={movie.id} />
+      </Grid.Column>
+    ))}
+  </Grid>
+)
+
+export default MoiveCollection
