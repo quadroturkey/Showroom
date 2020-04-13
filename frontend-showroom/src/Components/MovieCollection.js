@@ -2,6 +2,8 @@ import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import MoiveCard from './MovieCard'
 
+
+
 const MoiveCollection = (props) => (
   <Grid divided='vertically'>
     <Grid.Row columns={4}>
