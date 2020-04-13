@@ -3,6 +3,7 @@ import MovieCollection from './MovieCollection'
 import MovieCard from './MovieCard';
 import Search from './Search';
 
+
 // const key = "123e2f78bfa3cc8be6fbaf3324b4409f"
 // const API = `https://api.themoviedb.org/3/movie/550?api_key=${key}`
 
@@ -48,6 +49,7 @@ export default class MainPage extends Component {
 
       // this.state.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
     )
+
 
   }
 

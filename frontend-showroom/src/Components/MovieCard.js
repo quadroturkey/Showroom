@@ -1,23 +1,31 @@
-import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import React, {Component} from 'react';
+import CardBack from './CardBack'
+import CardFront from './CardFront'
+import ReactCardFlip from 'react-card-flip';
 
-const MovieCard = (props) => (
-  <Card.Group>
-      <Card>
-          <Card.Content>
-              <Image src={props.movie.poster} />
-              <Card.Header>
-                  {props.movie.title}
-              </Card.Header>
-              <Card.Meta>
-                  {props.movie.genres.map(genre => `${genre} `)}
-              </Card.Meta>
-              <Card.Description>
-                  {props.movie.description}
-              </Card.Description>
-          </Card.Content>
-      </Card>
-  </Card.Group>
-)
 
-export default MovieCard
+class MovieCard extends Component {
+  constructor() {
+    super();
+      this.state = {
+      isFlipped: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+ 
+  handleClick(e) {
+    e.preventDefault();
+    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+  }
+ 
+  render() {
+    return (
+      <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
+        <CardFront movie={this.props.movie} frontKey={this.props.movie.id} handleClick={this.handleClick} />     
+        <CardBack movie={this.props.movie} backKey={this.props.movie.id} handleClick={this.handleClick} />
+      </ReactCardFlip>
+    )
+  }
+}
+
+export default MovieCard;
