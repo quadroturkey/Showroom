@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import MovieCollection from './MovieCollection'
+import MovieCollection from './MovieCollection'
 import MovieCard from './MovieCard';
 
 
@@ -28,9 +28,10 @@ export default class MainPage extends Component {
 
   render () {
     return (
-      this.state.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
+      <MovieCollection movies={this.state.movies}/>
+      // this.state.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
     )
-      {/* <MovieCollection movies={this.state.movies}/> */}
+      
   }
 
 }
