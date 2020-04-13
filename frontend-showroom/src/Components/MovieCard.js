@@ -10,7 +10,7 @@ const MovieCard = (props) => (
                   {props.movie.title}
               </Card.Header>
               <Card.Meta>
-                  {props.movie.genres}
+                  {props.movie.genres.map(genre => `${genre} `)}
               </Card.Meta>
               <Card.Description>
                   {props.movie.description}
