@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import MovieCard from './MovieCard';
 
 export default class MovieCollection extends Component {
   render () {
     return <div>
-      {'map over movies to <MovieCard key={movie.id} movie={movie} />'}
+      {this.props.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)}
     </div>
   }
 }
