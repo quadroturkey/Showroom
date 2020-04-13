@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { Card, Image } from 'semantic-ui-react'
 
-export default class MovieCard extends Component {
-  render() {
-    return (
-      <>
-    <div>{this.props.moive.title}</div>
-    <div>{this.props.moive.poster}</div>
-    <div>{this.props.movie.genres}</div>
-    <div>{this.props.moive.description}</div>
-    </>
-    )
-  }
-}
+const MovieCard = (props) => (
+  <Card.Group>
+      <Card>
+          <Card.Content>
+              <Image src={props.movie.poster} />
+              <Card.Header>
+                  {props.movie.title}
+              </Card.Header>
+              <Card.Meta>
+                  {props.movie.genres}
+              </Card.Meta>
+              <Card.Description>
+                  {props.movie.description}
+              </Card.Description>
+          </Card.Content>
+      </Card>
+  </Card.Group>
+)
+
+export default MovieCard
