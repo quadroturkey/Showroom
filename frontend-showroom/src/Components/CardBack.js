@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 
-const MovieCard = (props) => 
+const CardBack = (props) => 
   <Card.Group>
     <Card onClick={props.handleClick}>
       <Card.Content>
@@ -10,4 +10,4 @@ const MovieCard = (props) =>
     </Card>
   </Card.Group>
 
-export default MovieCard
+export default CardBack
