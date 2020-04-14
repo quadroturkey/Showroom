@@ -4,7 +4,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 let i = 0
  
-class MoiveCollection extends React.Component {
+class MovieCollection extends React.Component {
   render() {
     return (
       <CarouselProvider
