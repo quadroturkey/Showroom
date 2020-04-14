@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import MovieCollection from './MovieCollection'
 import Search from './Search';
 
-
-
 export default class MainPage extends Component {
   constructor() {
     super()
@@ -32,22 +30,23 @@ export default class MainPage extends Component {
     })
     
   }
-
-  filterMovies = (searchTerm) => {
-    
+  
+  includeSearch = (str) => {
+    return str.toLowerCase().includes(this.state.search)
   }
+
+  filterMovies = () => {
+    const movies = this.state.movies.slice(0)
+    return movies.filter((movie) => this.includeSearch(movie.title) || this.includeSearch(movie.genres.toString()))
+  }
+
 
   render() {
     return (
       <>
         <Search onSearch={this.onSearch} />
-        <MovieCollection movies={this.state.movies.filter((movie) => movie.title.toLowerCase().includes(this.state.search) || movie.genres.toString().toLowerCase().includes(this.state.search))} />
+        <MovieCollection movies={this.filterMovies()}/>
       </>
-
-      // this.state.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
     )
-
-
   }
-
 }

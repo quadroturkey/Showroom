@@ -3,7 +3,6 @@ import CardBack from './CardBack'
 import CardFront from './CardFront'
 import ReactCardFlip from 'react-card-flip';
 
-
 class MovieCard extends Component {
   constructor() {
     super();
