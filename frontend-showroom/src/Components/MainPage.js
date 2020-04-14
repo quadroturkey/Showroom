@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import MovieCollection from './MovieCollection'
-import MovieCard from './MovieCard';
 import Search from './Search';
 
 
-// const key = "123e2f78bfa3cc8be6fbaf3324b4409f"
-// const API = `https://api.themoviedb.org/3/movie/550?api_key=${key}`
 
 export default class MainPage extends Component {
   constructor() {
@@ -31,12 +28,12 @@ export default class MainPage extends Component {
   onSearch = (e) => {
     console.log(e.target.value)
     this.setState({
-      search: e.target.value
+      search: e.target.value.toLowerCase()
     })
     
   }
 
-  filterMovies = () => {
+  filterMovies = (searchTerm) => {
     
   }
 
@@ -44,7 +41,7 @@ export default class MainPage extends Component {
     return (
       <>
         <Search onSearch={this.onSearch} />
-        <MovieCollection movies={this.state.movies.filter((movie) => movie.title.includes(this.state.search) || movie.genres.map((genre) => genre.includes(this.state.search)) )} />
+        <MovieCollection movies={this.state.movies.filter((movie) => movie.title.toLowerCase().includes(this.state.search) || movie.genres.toString().toLowerCase().includes(this.state.search))} />
       </>
 
       // this.state.movies.map(movie => <MovieCard key={movie.id} movie={movie} />)
