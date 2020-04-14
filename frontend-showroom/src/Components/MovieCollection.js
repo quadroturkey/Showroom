@@ -25,4 +25,4 @@ class MoiveCollection extends React.Component {
   }
 }
 
-export default MoiveCollection
+export default MovieCollection
