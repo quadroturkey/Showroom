@@ -14,7 +14,7 @@ const CardFront = (props) =>
     </Card.Content>
     <Card.Content extra>
         <Rating maxRating={5} defaultRating={props.movie.vote_average/2} disabled/>         
-        <Icon onClick={console.log('save to user func goes here')} name='save'/>
+        <Icon onClick={() => props.addMovie(props.movie)} name='save'/>
     </Card.Content>
   </Card>
 

@@ -21,7 +21,7 @@ class MovieCard extends Component {
   render() {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
-        <CardFront movie={this.props.movie} frontKey={this.props.movie.id} handleClick={this.handleClick}/>     
+        <CardFront movie={this.props.movie} frontKey={this.props.movie.id} handleClick={this.handleClick} addMovie={this.props.addMovie}/>     
         <CardBack movie={this.props.movie} backKey={this.props.movie.id} handleClick={this.handleClick} />
       </ReactCardFlip>
     )

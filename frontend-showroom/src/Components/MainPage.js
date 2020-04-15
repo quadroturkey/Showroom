@@ -48,6 +48,47 @@ export default class MainPage extends Component {
       })
   }
 
+  addMovie = (e) => {
+    console.log(e.genre_ids)
+    this.postMovie(e)
+    this.postAssosiation(e)
+  }
+
+  postMovie = (e) => {
+    fetch("http://localhost:3000/movies", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: e.id,
+        title: e.title,
+        poster_path: e.poster_path,
+        release_date: e.release_date,
+        vote_average: e.vote_average,
+        overview: e.overview,
+        genre_ids: e.genre_ids
+      })
+    })
+  }
+
+  postAssosiation = (e) => {
+    fetch("http://localhost:3000/user_movies", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_movies: {
+          user_id: 1,
+          movie_id: e.id
+        }
+      })
+    })
+  }
+
   onSearch = (e) => {
     console.log(e.target.value)
     this.setState({
@@ -67,8 +108,8 @@ export default class MainPage extends Component {
   render() {
     return (
       <>
-        <Search onSearch={this.onSearch} />      
-        <MovieCollection movies={this.filterMovies()} />
+        <Search onSearch={this.onSearch} />
+        <MovieCollection movies={this.filterMovies()} addMovie={this.addMovie}/>
       </>
     )
   }
