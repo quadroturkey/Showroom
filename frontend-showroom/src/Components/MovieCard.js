@@ -10,10 +10,10 @@ class MovieCard extends Component {
       isFlipped: false,
       poster: ''
     };
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
  
-  handleClick(e) {
+  handleClick = (e) => {
     e.preventDefault();
     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
   }
