@@ -7,6 +7,7 @@ let i = 0
  
 class MovieCollection extends React.Component {
   render() {
+    console.log(this.props.genres)
     return (
       <Container>
         <CarouselProvider

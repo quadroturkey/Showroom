@@ -4,27 +4,28 @@ import Search from './Search';
 
 const apiKey=`123e2f78bfa3cc8be6fbaf3324b4409f`
 
-const genres = [
-  {id: 28, name: "Action"},
-  {id: 12, name: "Adventure"},
-  {id: 16, name: "Animation"},
-  {id: 35, name: "Comedy"},
-  {id: 80, name: "Crime"},
-  {id: 99, name: "Documentary"},
-  {id: 18, name: "Drama" },
-  {id: 10751, name: "Family" },
-  {id: 14, name: "Fantasy"},
-  {id: 36, name: "History"},
-  {id: 27, name: "Horror" },
-  {id: 10402, name: "Music"},
-  {id: 9648, name: "Mystery"},
-  {id: 10749, name: "Romance" },
-  {id: 878, name: "Science Fiction"},
-  {id: 10770, name: "TV Movie"},
-  {id: 53, name: "Thriller"},
-  {id: 10752, name: "War"},
-  {id: 37, name: "Western"}
-  ]
+const genres = {
+  28: "Action",
+  12: "Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  14: "Fantasy",
+  36: "History",
+  27: "Horror",
+  10402: "Music",
+  9648: "Mystery",
+  10749: "Romance",
+  878: "Science Fiction",
+  10770: "TV Movie",
+  53: "Thriller",
+  10752: "War",
+  37: "Western"
+}
+  
 
 export default class MainPage extends Component {
   constructor() {
@@ -43,15 +44,25 @@ export default class MainPage extends Component {
     fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data.results)
-        this.setState({ movies: data.results })
+        const movieList = data.results.map(movie => {
+          movie.genres = movie.genre_ids.map(id => 
+            genres[id]
+          )
+          return movie
+        })
+
+        console.log(movieList)
+        this.setState({ 
+          movies: movieList 
+        })
       })
   }
 
   addMovie = (e) => {
     console.log(e.genre_ids)
     this.postMovie(e)
-    this.postAssosiation(e)
+    this.postUserMovie(e)
+    this.postMovieGenre(e)
   }
 
   postMovie = (e) => {
@@ -67,13 +78,12 @@ export default class MainPage extends Component {
         poster_path: e.poster_path,
         release_date: e.release_date,
         vote_average: e.vote_average,
-        overview: e.overview,
-        genre_ids: e.genre_ids
+        overview: e.overview
       })
     })
   }
 
-  postAssosiation = (e) => {
+  postUserMovie = (e) => {
     fetch("http://localhost:3000/user_movies", {
       method: "POST",
       headers: {
@@ -85,6 +95,24 @@ export default class MainPage extends Component {
           user_id: 1,
           movie_id: e.id
         }
+      })
+    })
+  }
+
+  postMovieGenre = (e) => {
+    e.genre_ids.map(id => {
+      fetch("http://localhost:3000/movie_genres", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          movie_genres: {
+            movie_id: e.id,
+            genre_id: id
+          }
+        })
       })
     })
   }
