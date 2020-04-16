@@ -8,7 +8,8 @@ class MovieCard extends Component {
     super();
       this.state = {
       isFlipped: false,
-      poster: ''
+      poster: '',
+      icon: ''
     };
     // this.handleClick = this.handleClick.bind(this);
   }
@@ -21,7 +22,7 @@ class MovieCard extends Component {
   render() {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal">
-        <CardFront movie={this.props.movie} frontKey={this.props.movie.id} handleClick={this.handleClick} addMovie={this.props.addMovie}/>     
+        <CardFront movie={this.props.movie} frontKey={this.props.movie.id} handleClick={this.handleClick} icon={this.props.icon} handleMovie={this.props.handleMovie}/>     
         <CardBack movie={this.props.movie} backKey={this.props.movie.id} handleClick={this.handleClick} />
       </ReactCardFlip>
     )

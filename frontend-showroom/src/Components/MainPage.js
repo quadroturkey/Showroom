@@ -32,7 +32,8 @@ export default class MainPage extends Component {
     super()
     this.state = {
       movies: [],
-      search: ''
+      search: '',
+      icon: 'save'
     }
   }
 
@@ -59,7 +60,7 @@ export default class MainPage extends Component {
   }
 
   addMovie = (e) => {
-    console.log(e.genre_ids)
+    console.log(e)
     this.postMovie(e)
     this.postUserMovie(e)
     this.postMovieGenre(e)
@@ -137,7 +138,7 @@ export default class MainPage extends Component {
     return (
       <>
         <Search onSearch={this.onSearch} />
-        <MovieCollection movies={this.filterMovies()} addMovie={this.addMovie}/>
+        <MovieCollection movies={this.filterMovies()} handleMovie={this.addMovie} icon={this.state.icon}/>
       </>
     )
   }

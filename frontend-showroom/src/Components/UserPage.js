@@ -7,7 +7,8 @@ class UserPage extends React.Component {
 
         this.state = {
             user: {},
-            movies: []
+            movies: [],
+            icon: 'remove circle'
         }
     }
 
@@ -31,13 +32,28 @@ class UserPage extends React.Component {
 
     }
 
+    deleteMovie = movie => {
+        console.log(movie)
+        const id = movie.id
+    
+        fetch(`http://localhost:3000/user_movies/${id}`, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(movies => {
+            this.setState({
+              movies: movies
+            })
+          })
+      }
+
     render() {
         console.log(this.state.user)
         console.log(this.state.movies)
         return (
             <div>
                 <h1>{`${this.state.user.name}'s Page`}</h1>
-                <MovieCollection movies={this.state.movies} />
+                <MovieCollection movies={this.state.movies} icon={this.state.icon} handleMovie={this.deleteMovie}/>
             </div>
 
 
