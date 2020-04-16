@@ -9,7 +9,7 @@ const CardFront = (props) =>
       <Image src={`${poster_url}${props.movie.poster_path}`} onClick={props.handleClick}  />
       <Card.Header>{props.movie.title}</Card.Header>
       <Card.Meta>
-        {props.movie.release_date.slice(0,4)}
+        {/* {props.movie.release_date.slice(0,4)} */}
       </Card.Meta>
     </Card.Content>
     <Card.Content extra>
