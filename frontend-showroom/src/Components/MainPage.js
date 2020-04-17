@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MovieCollection from './MovieCollection'
 import Search from './Search';
+import { Button, Container } from 'semantic-ui-react';
 
 const apiKey=`123e2f78bfa3cc8be6fbaf3324b4409f`
 
@@ -36,7 +37,8 @@ export default class MainPage extends Component {
     this.state = {
       movies: [],
       search: '',
-      icon: 'save'
+      icon: 'save',
+      color: 'green'
     }
   }
 
@@ -145,8 +147,21 @@ export default class MainPage extends Component {
   render() {
     return (
       <>
+      <Container>
         <Search onSearch={this.onSearch} />
-        {genresAry.map(genre => <MovieCollection movies={this.genreFilter(genre)} key={i++} genreName={genre} handleMovie={this.addMovie} icon={this.state.icon}/>)}
+        <a href='http://localhost:3001/user/1'><Button floated='right'>My Page</Button></a>
+      </Container>
+
+        {genresAry.map(genre => 
+          <MovieCollection 
+            movies={this.genreFilter(genre)} 
+            key={i++} 
+            genreName={genre} 
+            handleMovie={this.addMovie} 
+            icon={this.state.icon} 
+            color={this.state.color}  
+          /> 
+        )}
       </>
     )
   }

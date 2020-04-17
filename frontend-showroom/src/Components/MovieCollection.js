@@ -21,7 +21,7 @@ class MovieCollection extends React.Component {
         <ButtonBack>Back</ButtonBack>
         <ButtonNext>Next</ButtonNext>
           <Slider>
-            {this.props.movies.map(movie => <Slide index={i++}><MovieCard movie={movie} key={movie.id} icon={this.props.icon} handleMovie={this.props.handleMovie}/></Slide>)}
+            {this.props.movies.map(movie => <Slide index={i++} key={i}><MovieCard movie={movie} key={movie.id} icon={this.props.icon} color={this.props.color} handleMovie={this.props.handleMovie}/></Slide>)}
           </Slider>
         </CarouselProvider>
       </Container>
