@@ -35,21 +35,42 @@ class UserPage extends React.Component {
     deleteMovie = movie => {
         console.log(movie)
         const id = movie.id
-    
-        fetch(`http://localhost:3000/user_movies/${id}`, {
-          method: 'DELETE'
-        })
-          .then(res => res.json())
-          .then(movies => {
-            this.setState({
-              movies: movies
+
+        fetch(`http://localhost:3000/user_movies/`)
+        .then(r => r.json())
+        .then(data => {
+            const userMovies = data.filter(function(movie){
+                return movie.user_id === 1
             })
-          })
+            console.log(userMovies)
+            const userMovie = userMovies.filter(function(movie){
+                return movie.movie_id === id
+            })
+            const userMovieId = userMovie[0].id
+
+            fetch(`http://localhost:3000/user_movies/${userMovieId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+              })
+                .then(res => res.json())
+                .then(movie => {
+                   const newMovies = this.state.movies.slice(0)
+                   const movieIndex = newMovies.indexOf(movie)
+                   newMovies.splice(movieIndex, 1)
+                  this.setState({
+                      movies: newMovies
+                  })
+                })
+        })
+    
+
       }
 
     render() {
-        console.log(this.state.user)
-        console.log(this.state.movies)
         return (
             <div>
                 <h1>{`${this.state.user.name}'s Page`}</h1>
