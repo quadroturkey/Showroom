@@ -7,7 +7,6 @@ let i = 0
  
 class MovieCollection extends React.Component {
   render() {
-    console.log(this.props.genres)
     return (
       <Container>
         <CarouselProvider
@@ -18,11 +17,11 @@ class MovieCollection extends React.Component {
           totalSlides={this.props.movies.length}
           infinite
         >
-        <Header size='small'>Now Playing</Header>
+        <Header size='small'>{this.props.genreName}</Header>
         <ButtonBack>Back</ButtonBack>
         <ButtonNext>Next</ButtonNext>
           <Slider>
-            {this.props.movies.map(movie => <Slide index={i++}><MovieCard movie={movie} key={movie.id} addMovie={this.props.addMovie}/></Slide>)}
+            {this.props.movies.map(movie => <Slide index={i++} key={i}><MovieCard movie={movie} key={movie.id} addMovie={this.props.addMovie}/></Slide>)}
           </Slider>
         </CarouselProvider>
       </Container>
