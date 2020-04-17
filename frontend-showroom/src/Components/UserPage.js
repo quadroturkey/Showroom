@@ -1,5 +1,6 @@
 import React from 'react'
 import MovieCollection from './MovieCollection'
+import { Button } from 'semantic-ui-react';
 
 class UserPage extends React.Component {
     constructor() {
@@ -8,7 +9,8 @@ class UserPage extends React.Component {
         this.state = {
             user: {},
             movies: [],
-            icon: 'remove circle'
+            icon: 'remove circle',
+            color: 'red'
         }
     }
 
@@ -73,8 +75,9 @@ class UserPage extends React.Component {
     render() {
         return (
             <div>
+                <a href='http://localhost:3001'><Button>Home Page</Button></a>
                 <h1>{`${this.state.user.name}'s Page`}</h1>
-                <MovieCollection movies={this.state.movies} icon={this.state.icon} handleMovie={this.deleteMovie}/>
+                <MovieCollection movies={this.state.movies} icon={this.state.icon} color={this.state.color} handleMovie={this.deleteMovie}/>
             </div>
 
 
