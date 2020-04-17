@@ -25,7 +25,10 @@ const genres = {
   10752: "War",
   37: "Western"
 }
-  
+
+const showingTypes = ['now_playing', 'popular', 'top_rated', 'upcoming'] 
+const genresAry = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "TV Movie", "Thriller", "War", "Western"]
+let i = 0
 
 export default class MainPage extends Component {
   constructor() {
@@ -38,11 +41,11 @@ export default class MainPage extends Component {
   }
 
   componentDidMount() {
-    this.fetchMovies()
+    showingTypes.map(type => this.fetchMovies(type))
   }
 
-  fetchMovies = () => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`)
+  fetchMovies = (type) => {
+    fetch(`https://api.themoviedb.org/3/movie/${type}?api_key=${apiKey}&language=en-US&page={1}`)
       .then(resp => resp.json())
       .then(data => {
         const movieList = data.results.map(movie => {
@@ -54,7 +57,7 @@ export default class MainPage extends Component {
 
         console.log(movieList)
         this.setState({ 
-          movies: movieList 
+          movies: [...this.state.movies, ...movieList]
         })
       })
   }
@@ -102,7 +105,7 @@ export default class MainPage extends Component {
 
   postMovieGenre = (e) => {
     e.genre_ids.map(id => {
-      fetch("http://localhost:3000/movie_genres", {
+      return fetch("http://localhost:3000/movie_genres", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -134,11 +137,16 @@ export default class MainPage extends Component {
     return movies.filter((movie) => this.includeSearch(movie.title))
   }
 
+  genreFilter = (genreSearch) => {
+    const movies = this.state.movies.slice(0)
+    return movies.filter(movie => movie.genres.includes(genreSearch))
+  }
+
   render() {
     return (
       <>
         <Search onSearch={this.onSearch} />
-        <MovieCollection movies={this.filterMovies()} handleMovie={this.addMovie} icon={this.state.icon}/>
+        {genresAry.map(genre => <MovieCollection movies={this.genreFilter(genre)} key={i++} genreName={genre} handleMovie={this.addMovie} icon={this.state.icon}/>)}
       </>
     )
   }

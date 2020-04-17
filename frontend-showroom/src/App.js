@@ -12,7 +12,6 @@ function App() {
         <Route exact path="/" component={MainPage} />
         <Route exact path="/user/:id" component={UserPage} />
       </Router>
-      {/* <MainPage /> */}
     </div>
   );
 }
